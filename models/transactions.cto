@@ -1,0 +1,56 @@
+namespace kigen.transactions
+import kigen.participants.Farmer
+import kigen.participants.Employer
+import kigen.assets.ProductPackage
+
+enum TransactionState {
+    o PENDING
+    o DONE
+}
+
+enum TransactionType {
+    o TRANSPORTATION
+    o STORED
+    o RETAIL
+}
+
+transaction CreatePackageTransaction {
+  o String productPackId
+  o String productSerial
+  o String productStatus
+  o Long unitPrice
+  o DateTime createDate
+  --> Farmer farmer 
+}
+
+transaction TransferTransaction {
+  o DateTime transferTime
+  o TransactionState state
+  --> ProductPackage product
+  --> Employer newHolder
+}
+
+transaction Reception {
+  o String productPackId
+  o String productSerial
+  o String holderId
+}
+
+event CreatePackageEvent {
+  o String productPackId
+  o String farmerId
+}
+
+event TransferEvent {
+  o String productPackId
+  o String fromId
+  o String toId
+}
+
+event ReceptionEvent {
+  o String productPackId
+  o String actorId
+  o Boolean succes
+}
+
+

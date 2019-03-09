@@ -1,0 +1,22 @@
+namespace kigen.assets
+import kigen.participants.Customer
+import kigen.participants.Employer
+import kigen.participants.Farmer
+
+concept QuarantinePlacement {
+  o DateTime start
+  o String reason
+}
+
+asset ProductPackage identified by productPackId {
+  o String productPackId
+  o String productSerial
+  o String packageHash
+  o String productStatus optional
+  o Long unitPrice
+  o DateTime createDate
+  o QuarantinePlacement quarantinePlacement optional
+  --> Farmer farmer
+  --> Employer productHolder 
+}
+

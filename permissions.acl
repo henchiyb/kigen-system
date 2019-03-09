@@ -1,0 +1,118 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+rule MainManagerCanControlAsset {
+    description: "Allow manager access to all assets"
+    participant: "kigen.participants.Manager"
+    operation: ALL
+    resource: "kigen.assets.*"
+    action: ALLOW
+}
+
+rule MainManagerCanControlParticipant {
+    description: "Allow manager access to all participants"
+    participant: "kigen.participants.Manager"
+    operation: ALL
+    resource: "kigen.participants.*"
+    action: ALLOW
+}
+
+rule MainManagerCanControlTransaction {
+    description: "Allow manager access to all transactions"
+    participant: "kigen.participants.Manager"
+    operation: ALL
+    resource: "kigen.transactions.*"
+    action: ALLOW
+}
+
+rule FarmerCanSubmitCreateTransaction {
+    description: "Allow farmer participants to submit create transactions"
+    participant: "kigen.participants.Farmer"
+    operation: CREATE
+    resource: "kigen.transactions.CreatePackageTransaction"
+    action: ALLOW
+}
+
+rule EmployerCanSubmitTransferTransaction {
+    description: "Allow employer participants to submit create transactions"
+    participant: "kigen.participants.Employer"
+    operation: CREATE
+    resource: "kigen.transactions.TransferTransaction"
+    action: ALLOW
+}
+
+rule EmployerCanSubmitReceptionTransaction {
+    description: "Allow employer participants to submit create transactions"
+    participant: "kigen.participants.Employer"
+    operation: CREATE
+    resource: "kigen.transactions.Reception"
+    action: ALLOW
+}
+
+rule FarmerCanSeeAndUpdateTheirAssets {
+    description: "Allow farmer participant update their assets"
+    participant(p): "kigen.participants.Farmer"
+    operation: READ, UPDATE
+    resource(r): "kigen.assets.ProductPackage"
+    condition: (r.farmer.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
+
+rule StoreManagerCanManageStoreEmployer {
+    description: "Allow manager to manage employer"
+    participant: "kigen.participants.StoreManager"
+    operation: ALL
+    resource: "kigen.participants.StoreEmployer"
+    action: ALLOW
+}
+
+rule FarmManagerCanManageFarmer {
+    description: "Allow manager to manage employer"
+    participant: "kigen.participants.FarmManager"
+    operation: ALL
+    resource: "kigen.participants.Farmer"
+    action: ALLOW
+}
+
+rule TransportationManagerCanManageTransportationEmployer {
+    description: "Allow manager to manage employer"
+    participant: "kigen.participants.TransportationManager"
+    operation: ALL
+    resource: "kigen.participants.TransportationEmployer"
+    action: ALLOW
+}
+
+rule SystemACL {
+  description:  "System ACL to permit all access"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.**"
+  action: ALLOW
+}
+
+rule NetworkAdminUser {
+    description: "Grant business network administrators full access to user resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "**"
+    action: ALLOW
+}
+
+rule NetworkAdminSystem {
+    description: "Grant business network administrators full access to system resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "org.hyperledger.composer.system.**"
+    action: ALLOW
+}
