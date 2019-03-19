@@ -1,10 +1,10 @@
 namespace kigen.participants
 
-participant Actor identified by actorId {
+abstract participant Actor identified by actorId {
   o String actorId
 }
 
-participant Employer identified by employerId {
+abstract participant Employer identified by employerId {
   o String employerId
 }
 

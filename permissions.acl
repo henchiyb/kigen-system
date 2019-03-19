@@ -36,11 +36,35 @@ rule MainManagerCanControlTransaction {
     action: ALLOW
 }
 
+rule EveryOneCanReadProductPackage {
+    description: "Allow every one read ProductPackage asset"
+    participant: "kigen.participants.*"
+    operation: READ
+    resource: "kigen.assets.ProductPackage"
+    action: ALLOW
+}
+
+rule EmployerCanUpdateProductPackage {
+    description: "Allow employer participants to update ProductPackage"
+    participant: "kigen.participants.Employer"
+    operation: UPDATE
+    resource: "kigen.assets.ProductPackage"
+    action: ALLOW
+}
+
 rule FarmerCanSubmitCreateTransaction {
     description: "Allow farmer participants to submit create transactions"
     participant: "kigen.participants.Farmer"
     operation: CREATE
     resource: "kigen.transactions.CreatePackageTransaction"
+    action: ALLOW
+}
+
+rule FarmerCanCreateProductPackage {
+    description: "Allow farmer participants to create ProductPackage"
+    participant: "kigen.participants.Farmer"
+    operation: CREATE
+    resource: "kigen.assets.ProductPackage"
     action: ALLOW
 }
 
@@ -98,6 +122,14 @@ rule SystemACL {
   participant: "org.hyperledger.composer.system.Participant"
   operation: ALL
   resource: "org.hyperledger.composer.system.**"
+  action: ALLOW
+}
+
+rule EveryoneCanReadHistories {
+  description:  "System ACL to permit all access"
+  participant: "kigen.participants.*"
+  operation: READ
+  resource: "org.hyperledger.composer.system.HistorianRecord"
   action: ALLOW
 }
 

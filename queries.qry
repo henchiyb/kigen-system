@@ -1,0 +1,11 @@
+query selectProductPackageByHash {
+  description: "Select product package by hash"
+  statement:
+      SELECT kigen.assets.ProductPackage WHERE (productPackId ==_$productPackId)
+}
+
+// query selectProductPackageHistorian {
+//   description: "Select product package historian by package id"
+//   statement:
+//       SELECT org.hyperledger.composer.system.HistorianRecord WHERE (eventsEmitted CONTAINS (productPackId == _$productPackId))
+// }
