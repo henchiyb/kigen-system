@@ -18,6 +18,7 @@ transaction CreatePackageTransaction {
   o String productPackId
   o String productSerial
   o String productStatus
+  o String imgLink
   o Long unitPrice
   o DateTime createDate
   --> Farmer farmer 
@@ -27,6 +28,7 @@ transaction TransferTransaction {
   o DateTime transferTime
   o TransactionState state default = "PENDING"
   o TransactionType type
+  o String imgLink
   --> ProductPackage product
   --> Employer newHolder
 }
@@ -42,6 +44,7 @@ event CreatePackageEvent {
   o String farmerId
   o String productSerial
   o String productStatus
+  o String imgLink
   o Long unitPrice
 }
 
@@ -49,6 +52,7 @@ event TransferEvent {
   o String productPackId
   o String fromId
   o String toId
+  o String imgLink
 }
 
 event ReceptionEvent {

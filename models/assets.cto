@@ -13,6 +13,7 @@ asset ProductPackage identified by productPackId {
   o String productSerial
   o String packageHash
   o String productStatus optional
+  o String imgLink
   o Long unitPrice
   o DateTime createDate
   o QuarantinePlacement quarantinePlacement optional
