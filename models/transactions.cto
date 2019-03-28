@@ -55,5 +55,6 @@ event TransferEvent {
   o String fromId
   o String toId
   o String imgLink
+  o String type
 }
 

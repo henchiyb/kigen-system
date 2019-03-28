@@ -76,14 +76,6 @@ rule EmployerCanSubmitTransferTransaction {
     action: ALLOW
 }
 
-rule EveryoneCanSubmitGetHistoryTransaction {
-    description: "Allow employer participants to submit create transactions"
-    participant: "kigen.participants.*"
-    operation: CREATE
-    resource: "kigen.transactions.GetHistoryTransaction"
-    action: ALLOW
-}
-
 rule FarmerCanSeeAndUpdateTheirAssets {
     description: "Allow farmer participant update their assets"
     participant(p): "kigen.participants.Farmer"
@@ -122,6 +114,14 @@ rule SystemACL {
   participant: "org.hyperledger.composer.system.Participant"
   operation: ALL
   resource: "org.hyperledger.composer.system.**"
+  action: ALLOW
+}
+
+rule EveryoneCanSubmitGetHistories {
+  description:  "System ACL to permit all access"
+  participant: "kigen.participants.*"
+  operation: CREATE
+  resource: "kigen.transactions.GetHistoryTransaction"
   action: ALLOW
 }
 
