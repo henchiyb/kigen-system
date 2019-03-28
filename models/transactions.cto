@@ -33,10 +33,12 @@ transaction TransferTransaction {
   --> Employer newHolder
 }
 
-transaction Reception {
+transaction GetHistoryTransaction {
   o String productPackId
-  o String productSerial
-  --> Employer currentHolder
+}
+
+event GetHistoryTransactionResults {
+  o String[] results
 }
 
 event CreatePackageEvent {
@@ -54,11 +56,4 @@ event TransferEvent {
   o String toId
   o String imgLink
 }
-
-event ReceptionEvent {
-  o String productPackId
-  o String actorId
-  o Boolean succes
-}
-
 

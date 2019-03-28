@@ -76,11 +76,11 @@ rule EmployerCanSubmitTransferTransaction {
     action: ALLOW
 }
 
-rule EmployerCanSubmitReceptionTransaction {
+rule EveryoneCanSubmitGetHistoryTransaction {
     description: "Allow employer participants to submit create transactions"
-    participant: "kigen.participants.Employer"
+    participant: "kigen.participants.*"
     operation: CREATE
-    resource: "kigen.transactions.Reception"
+    resource: "kigen.transactions.GetHistoryTransaction"
     action: ALLOW
 }
 
@@ -128,6 +128,14 @@ rule SystemACL {
 rule EveryoneCanReadHistories {
   description:  "System ACL to permit all access"
   participant: "kigen.participants.*"
+  operation: READ
+  resource: "org.hyperledger.composer.system.HistorianRecord"
+  action: ALLOW
+}
+
+rule EveryoneCanReadEmployerInfo {
+  description:  "System ACL to permit all access"
+  participant: "kigen.participants.Employer"
   operation: READ
   resource: "org.hyperledger.composer.system.HistorianRecord"
   action: ALLOW
