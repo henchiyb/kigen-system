@@ -18,6 +18,7 @@ transaction CreatePackageTransaction {
   o String productPackId
   o String productSerial
   o String productStatus
+  o String farmId
   o String imgLink
   o Long unitPrice
   o DateTime createDate
@@ -47,6 +48,7 @@ event CreatePackageEvent {
   o String productSerial
   o String productStatus
   o String imgLink
+  o String farmId
   o Long unitPrice
 }
 
@@ -57,4 +59,3 @@ event TransferEvent {
   o String imgLink
   o String type
 }
-

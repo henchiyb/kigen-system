@@ -44,9 +44,18 @@ rule EveryOneCanReadProductPackage {
     action: ALLOW
 }
 
-rule EmployerCanUpdateProductPackage {
+rule EmployerHoldingProductCanUpdateProductPackage {
     description: "Allow employer participants to update ProductPackage"
-    participant: "kigen.participants.Employer"
+    participant(p): "kigen.participants.Employer"
+    operation: UPDATE
+    resource(r): "kigen.assets.ProductPackage"
+  	condition: (r.productHolder.getIdentifier() == m.getIdentifier())
+    action: ALLOW
+}
+
+rule WarehouseEmployerCanUpdateProductPackage {
+    description: "Allow employer participants to update ProductPackage"
+    participant: "kigen.participants.WarehouseEmployer"
     operation: UPDATE
     resource: "kigen.assets.ProductPackage"
     action: ALLOW

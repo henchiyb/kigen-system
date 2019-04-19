@@ -1,10 +1,10 @@
 namespace kigen.participants
 
-abstract participant Actor identified by actorId {
+participant Actor identified by actorId {
   o String actorId
 }
 
-abstract participant Employer identified by employerId {
+participant Employer identified by employerId {
   o String employerId
 }
 
@@ -15,6 +15,9 @@ participant StoreEmployer extends Employer {
 }
 
 participant TransportationEmployer extends Employer {
+}
+
+participant WarehouseEmployer extends Employer {
 }
 
 participant Customer extends Actor {
@@ -30,4 +33,7 @@ participant TransportationManager extends Actor {
 }
 
 participant StoreManager extends Actor {
+}
+
+participant WarehouseManager extends Actor {
 }

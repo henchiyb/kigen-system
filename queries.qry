@@ -4,8 +4,14 @@ query selectProductPackageByHash {
       SELECT kigen.assets.ProductPackage WHERE (productPackId ==_$productPackId)
 }
 
-// query selectProductPackageHistorian {
-//   description: "Select product package historian by package id"
-//   statement:
-//       SELECT org.hyperledger.composer.system.HistorianRecord WHERE (eventsEmitted CONTAINS (productPackId == _$productPackId))
-// }
+query selectProductPackageByHolder {
+   description: "Select product package by holder"
+   statement:
+       SELECT kigen.assets.ProductPackage WHERE (productHolder == _$holderParam)
+ }
+
+query selectProductPackageByHolder1 {
+   description: "Select product package by holder"
+   statement:
+       SELECT kigen.assets.ProductPackage WHERE (productHolder CONTAINS [_$holderParam])
+ }

@@ -2,6 +2,7 @@ namespace kigen.assets
 import kigen.participants.Customer
 import kigen.participants.Employer
 import kigen.participants.Farmer
+import kigen.participants.WarehouseManager
 
 concept QuarantinePlacement {
   o DateTime start
@@ -13,11 +14,18 @@ asset ProductPackage identified by productPackId {
   o String productSerial
   o String packageHash
   o String productStatus optional
+  o String farmId
   o String imgLink
   o Long unitPrice
   o DateTime createDate
   o QuarantinePlacement quarantinePlacement optional
   --> Farmer farmer
   --> Employer productHolder 
+}
+
+asset Warehouse identified by warehouseId {
+  o String warehouseId
+  --> ProductPackage[] productPackages
+  --> WarehouseManager manager
 }
 
