@@ -17,11 +17,9 @@ enum TransactionType {
 transaction CreatePackageTransaction {
   o String productPackId
   o String productSerial
-  o String packageHash
   o String productStatus
   o String farmId
   o String imgLink
-  o Long numberOfProducts
   o Long unitPrice
   o DateTime createDate
   --> Farmer farmer 

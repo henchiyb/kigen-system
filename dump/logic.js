@@ -35,15 +35,15 @@ async function createTransaction(createTransaction) {
     let productPack = factory.newResource('kigen.assets', 'ProductPackage', createTransaction.productPackId);
     // create package property
     productPack.productSerial = createTransaction.productSerial;
-    productPack.packageHash = createTransaction.packageHash;
+    productPack.packageHash = hash(createTransaction.productPackId + createTransaction.productSerial);
     productPack.unitPrice = createTransaction.unitPrice;
-  	productPack.numberOfProducts = createTransaction.numberOfProducts;
     productPack.createDate = createTransaction.createDate;
     productPack.productStatus = createTransaction.productStatus;
     productPack.farmId = createTransaction.farmId;
     productPack.imgLink = createTransaction.imgLink;
     productPack.farmer = factory.newRelationship('kigen.participants', 'Farmer', createTransaction.farmer.getIdentifier());
     productPack.productHolder = factory.newRelationship('kigen.participants', 'Farmer', createTransaction.farmer.getIdentifier());
+
     const createEvent = getFactory().newEvent('kigen.transactions', 'CreatePackageEvent');
     createEvent.productPackId = createTransaction.productPackId;
     createEvent.farmerId = createTransaction.farmer.getIdentifier();
@@ -113,3 +113,19 @@ async function getHistory(getHistoryTransaction) {
     event.results = results;
     emit(event);
 }
+
+
+let hash = function(s) {
+    var a = 1, c = 0, h, o;
+    if (s) {
+        a = 0;
+        /*jshint plusplus:false bitwise:false*/
+        for (h = s.length - 1; h >= 0; h--) {
+            o = s.charCodeAt(h);
+            a = (a<<6&268435455) + o + (o<<14);
+            c = a & 266338304;
+            a = c!==0?a^c>>21:a;
+        }
+    }
+    return String(a);
+};

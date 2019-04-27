@@ -36,14 +36,6 @@ rule MainManagerCanControlTransaction {
     action: ALLOW
 }
 
-rule WarehouseManagerCanControlTransaction {
-    description: "Allow Warehouse Manager control Warehouse"
-    participant: "kigen.participants.WarehouseManager"
-    operation: ALL
-    resource: "kigen.assets.Warehouse"
-    action: ALLOW
-}
-
 rule EveryOneCanReadProductPackage {
     description: "Allow every one read ProductPackage asset"
     participant: "kigen.participants.*"

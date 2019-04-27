@@ -1,0 +1,17 @@
+query selectProductPackageByHash {
+  description: "Select product package by hash"
+  statement:
+      SELECT kigen.assets.ProductPackage WHERE (productPackId ==_$productPackId)
+}
+
+query selectProductPackageByHolder {
+   description: "Select product package by holder"
+   statement:
+       SELECT kigen.assets.ProductPackage WHERE (productHolder == _$holderParam)
+ }
+
+query selectProductPackageByHolder1 {
+   description: "Select product package by holder"
+   statement:
+       SELECT kigen.assets.ProductPackage WHERE (productHolder CONTAINS [_$holderParam])
+ }
