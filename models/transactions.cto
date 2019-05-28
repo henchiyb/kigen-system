@@ -21,11 +21,26 @@ transaction CreatePackageTransaction {
   o String productStatus
   o String farmId
   o String imgLink
+  o String qrCode
   o Long numberOfProducts
   o Long unitPrice
   o DateTime createDate
   --> Farmer farmer 
 }
+
+transaction CreateSubPackageTransaction {
+  o String subPackId
+  o String productSerial
+  o String packageHash
+  o String productStatus
+  o String imgLink
+  o String qrCode
+  o Long unitPrice
+  o DateTime createDate
+  --> Employer employer
+  --> ProductPackage productPackage 
+}
+
 
 transaction TransferTransaction {
   o DateTime transferTime
@@ -51,6 +66,18 @@ event CreatePackageEvent {
   o String productStatus
   o String imgLink
   o String farmId
+  o String qrCode
+  o Long unitPrice
+}
+
+event CreateSubPackageEvent {
+  o String subPackId
+  o String employerId
+  o String productSerial
+  o String productStatus
+  o String imgLink
+  o String packageId
+  o String qrCode
   o Long unitPrice
 }
 

@@ -52,12 +52,20 @@ rule EveryOneCanReadProductPackage {
     action: ALLOW
 }
 
+// rule EmployerHoldingProductCanUpdateProductPackage {
+//     description: "Allow employer participants to update ProductPackage"
+//     participant(p): "kigen.participants.Employer"
+//     operation: UPDATE
+//     resource(r): "kigen.assets.ProductPackage"
+//   	condition: (r.productHolder.getIdentifier() == m.getIdentifier())
+//     action: ALLOW
+// }
+
 rule EmployerHoldingProductCanUpdateProductPackage {
     description: "Allow employer participants to update ProductPackage"
-    participant(p): "kigen.participants.Employer"
+    participant: "kigen.participants.*"
     operation: UPDATE
-    resource(r): "kigen.assets.ProductPackage"
-  	condition: (r.productHolder.getIdentifier() == m.getIdentifier())
+    resource: "kigen.assets.*"
     action: ALLOW
 }
 

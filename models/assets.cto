@@ -16,6 +16,7 @@ asset ProductPackage identified by productPackId {
   o String productStatus optional
   o String farmId
   o String imgLink
+  o String qrCode
   o Long numberOfProducts
   o Long unitPrice
   o DateTime createDate
@@ -30,4 +31,18 @@ asset Warehouse identified by warehouseId {
   o String address
   --> ProductPackage[] packagesInWarehouse
   --> WarehouseEmployer[] employersInWarehouse
+}
+
+asset SubProductPackage identified by subPackId {
+  o String subPackId
+  o String productSerial
+  o String packageHash
+  o String productStatus optional
+  o String imgLink
+  o String qrCode
+  o Long unitPrice
+  o DateTime createDate
+  o QuarantinePlacement quarantinePlacement optional
+  --> Employer employer
+  --> ProductPackage productPackage
 }
